@@ -1,7 +1,7 @@
 mongodb:
   image: ebuildy/mongodb
   volumes:
-    - /kinoulink/api-infra/mongodb/config:/var/config:ro
+    - /kinoulink/api-infra/docker/mongodb/config:/var/config:ro
     - /var/kinoulink/mongodb/data:/var/data:rw
   ports:
     - 27017:27017
@@ -9,7 +9,7 @@ mongodb:
 web:
   build: web/docker
   volumes:
-    - /kinoulink/api-infra/web/config:/var/config:ro
+    - /kinoulink/api-infra/docker/web/config:/var/config:ro
     - /kinoulink/api:/var/www:ro
     - /var/kinoulink/web/log/nginx:/var/log/nginx:rw
   ports:
