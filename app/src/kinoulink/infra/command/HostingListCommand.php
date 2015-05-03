@@ -20,8 +20,10 @@ class HostingListCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->getApplication()->getService('azure.client')->call('services/hostedservices');
-
+        foreach($this->getApplication()->getConfig('hosts') as $host => $data)
+        {
+            $output->writeln($host . ' => ' . $data['uri'] . ':' . $data['port']);
+        }
     }
 
 

@@ -12,7 +12,7 @@ class HelloCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('knl:hello')
+            ->setName('hello')
             ->setDescription('Say hello world!')
         ;
     }

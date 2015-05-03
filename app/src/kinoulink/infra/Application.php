@@ -19,7 +19,7 @@ class Application extends BaseApplication
         $this->config = include(ROOT . '/../config/' . $config . '.php');
 
         $this->services = [
-            'azure.client' => new AzureAPIClient()
+            'azure.client' => new AzureAPIClient($this->getConfig('hosts'))
         ];
     }
 
