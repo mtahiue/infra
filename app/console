@@ -1,0 +1,18 @@
+#!/usr/bin/env php
+<?php
+
+define('ROOT', __DIR__);
+
+include(__DIR__ . '/vendor/autoload.php');
+
+$application = new kinoulink\infra\Application('kinoulink');
+
+
+foreach(glob(__DIR__ . '/src/kinoulink/infra/command/*Command.php') as $command)
+{
+    $class = str_replace('/', '\\', str_replace(['.php', __DIR__ . '/src'], '', $command));
+
+    $application->add(new $class());
+}
+
+$application->run();
