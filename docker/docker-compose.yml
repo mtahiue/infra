@@ -10,7 +10,7 @@ web:
   build: web/docker
   volumes:
     - /kinoulink/api-infra/docker/web/config:/var/config:ro
-    - /kinoulink/api:/var/www:ro
+    - /kinoulink/api:/var/www:rw
     - /var/kinoulink/web/log/nginx:/var/log/nginx:rw
   ports:
     - 80:80
