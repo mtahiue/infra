@@ -16,3 +16,25 @@ web:
     - 80:80
   links:
     - mongodb
+
+consul:
+  command: -server -bootstrap -ui-dir /ui
+  image: progrium/consul:latest
+  ports:
+  - "8300"
+  - "8400"
+  - "8500"
+  - "8600/udp"
+  environment:
+  - "affinity:container!=nodes_consul_*"
+  net: "host"
+
+registrator:
+  command: consul://127.0.0.1:8500
+  image: progrium/registrator:latest
+  volumes:
+  - "/var/run/docker.sock:/tmp/docker.sock"
+  environment:
+  - "affinity:container!=nodes_registrator_*"
+  net: "host"
+
