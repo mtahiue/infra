@@ -5,28 +5,34 @@ mongodb:
     - /var/kinoulink/mongodb/data:/var/data:rw
   ports:
     - 27017:27017
+  environment:
+    - SERVICE_NAME=mongodb
+    - SERVICE_TAGS=mongodb,data
 
 web:
-  build: web/docker
+  build: web
   volumes:
     - /kinoulink/api-infra/docker/web/config:/var/config:ro
-    - /kinoulink/api:/var/www:rw
     - /var/kinoulink/web/log/nginx:/var/log/nginx:rw
   ports:
     - 80:80
   links:
     - mongodb
+  environment:
+    - SERVICE_NAME=web
+    - SERVICE_TAGS=nginx,php,app
 
 consul:
   command: -server -bootstrap -ui-dir /ui
   image: progrium/consul:latest
   ports:
-  - "8300"
-  - "8400"
-  - "8500"
-  - "8600/udp"
+    - "8300"
+    - "8400"
+    - "8500"
+    - "8600/udp"
   environment:
-  - "affinity:container!=nodes_consul_*"
+    - "affinity:container!=nodes_consul_*"
+    - SERVICE_TAGS=admin,data
   net: "host"
 
 registrator:
