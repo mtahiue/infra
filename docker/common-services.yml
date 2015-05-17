@@ -1,0 +1,34 @@
+mongodb:
+  image: ebuildy/mongodb
+  volumes:
+    - /kinoulink/api-infra/docker/mongodb/config:/var/config:ro
+    - /var/kinoulink/mongodb/data:/var/data:rw
+  ports:
+    - 27017:27017
+  environment:
+    - SERVICE_NAME=mongodb
+    - SERVICE_TAGS=mongodb,data
+
+app:
+  build: app
+  volumes:
+    - /kinoulink/api-infra/docker/app/app:/var/kinoulink/www:ro
+  ports:
+    - 80:81
+  environment:
+    - SERVICE_NAME=app
+    - SERVICE_TAGS=nginx,php,data
+
+web:
+  build: web
+  volumes:
+    - /kinoulink/api-infra/docker/web/config:/var/config:ro
+    - /var/kinoulink/web/log/nginx:/var/log/nginx:rw
+  ports:
+    - 80
+  links:
+    - mongodb
+  environment:
+    - SERVICE_80_NAME=http
+    - SERVICE_NAME=web
+    - SERVICE_TAGS=nginx,php,app

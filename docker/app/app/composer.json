@@ -1,0 +1,8 @@
+{
+    "require": {
+        "slim/slim": "~2.6",
+        "symfony/filesystem": "~2.6",
+        "entomb/slim-json-api": "~1.1",
+        "ncuesta/clinner": "~1.0"
+    }
+}

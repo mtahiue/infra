@@ -1,0 +1,53 @@
+mongodb:
+  extends:
+      file: common-services.yml
+      service: mongodb
+
+web:
+  build: web_prod
+  volumes:
+    - /kinoulink/api-infra/docker/web/config:/var/config:ro
+    - /var/kinoulink/web/log/nginx:/var/log/nginx:rw
+  ports:
+    - 80
+  links:
+    - mongodb
+  environment:
+    - SERVICE_80_NAME=http
+    - SERVICE_NAME=web
+    - SERVICE_TAGS=nginx,php,app
+
+control:
+  build: control
+  ports:
+    - 80:80
+  environment:
+    - SERVICE_80_NAME=http
+    - SERVICE_NAME=control
+    - SERVICE_TAGS=nginx,proxy
+  volumes:
+    - "/var/run/docker.sock:/tmp/docker.sock:ro"
+    - /kinoulink/api-infra/docker/control/templates:/var/kinoulink/templates:ro
+  net: "host"
+
+consul:
+  command: -server -bootstrap -ui-dir /ui
+  image: progrium/consul:latest
+  ports:
+    - "8300"
+    - "8400"
+    - "8500"
+    - "8600/udp"
+  environment:
+    - "affinity:container!=nodes_consul_*"
+    - SERVICE_TAGS=admin,data
+  net: "host"
+
+registrator:
+  command: consul://127.0.0.1:8500
+  image: progrium/registrator:latest
+  volumes:
+  - "/var/run/docker.sock:/tmp/docker.sock"
+  environment:
+  - "affinity:container!=nodes_registrator_*"
+  net: "host"

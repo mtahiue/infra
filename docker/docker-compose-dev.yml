@@ -1,0 +1,15 @@
+mongodb:
+  extends:
+      file: common-services.yml
+      service: mongodb
+
+web:
+  build: web_dev
+  volumes:
+    - /kinoulink/api-infra/docker/web/config:/var/config:ro
+    - /var/kinoulink/web/log/nginx:/var/log/nginx:rw
+    - /kinoulink/api:/var/kinoulink/www:ro
+  ports:
+    - 80
+  links:
+    - mongodb
