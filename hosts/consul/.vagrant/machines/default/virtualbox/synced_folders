@@ -1,0 +1,1 @@
+{"nfs":{"/var/kinoulink/infra":{"type":"nfs","mount_options":["tcp"],"guestpath":"/var/kinoulink/infra","hostpath":"/Users/tom/www/kinoulink/infra","disabled":false,"map_uid":501,"map_gid":20,"nfs_udp":true,"nfs_version":3,"uuid":"3154942306"}},"virtualbox":{"/vagrant":{"guestpath":"/vagrant","hostpath":"/Users/tom/www/kinoulink/infra/hosts/consul","disabled":false}}}
