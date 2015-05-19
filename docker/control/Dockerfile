@@ -12,7 +12,8 @@ RUN mkdir /var/kinoulink && cd /var/kinoulink && mkdir log config tmp www templa
 ADD https://github.com/hashicorp/consul-template/releases/download/v0.9.0/consul-template_0.9.0_linux_amd64.tar.gz /usr/bin/
 RUN tar -C /usr/local/bin --strip-components 1 -zxf /usr/bin/consul-template_0.9.0_linux_amd64.tar.gz
 
-ADD config              /var/kinoulink/config
+#ADD config              /var/kinoulink/config
+VOLUME /var/kinoulink/config
 
 RUN mkdir               /etc/service/nginx
 ADD service/nginx.sh    /etc/service/nginx/run

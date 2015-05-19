@@ -10,6 +10,6 @@ web:
     - /var/kinoulink/web/log/nginx:/var/log/nginx:rw
     - /kinoulink/api:/var/kinoulink/www:ro
   ports:
-    - 80
+    - 80:80
   links:
     - mongodb

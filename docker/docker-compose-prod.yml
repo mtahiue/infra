@@ -17,18 +17,19 @@ web:
     - SERVICE_NAME=web
     - SERVICE_TAGS=nginx,php,app
 
-control:
-  build: control
-  ports:
-    - 80:80
-  environment:
-    - SERVICE_80_NAME=http
-    - SERVICE_NAME=control
-    - SERVICE_TAGS=nginx,proxy
-  volumes:
-    - "/var/run/docker.sock:/tmp/docker.sock:ro"
-    - /kinoulink/api-infra/docker/control/templates:/var/kinoulink/templates:ro
-  net: "host"
+#control:
+#  build: control
+#  ports:
+#    - 80:80
+#  environment:
+#    - SERVICE_80_NAME=http
+#    - SERVICE_NAME=control
+#    - SERVICE_TAGS=nginx,proxy
+#  volumes:
+#    - /var/run/docker.sock:/tmp/docker.sock:ro
+#    - /kinoulink/api-infra/docker/control/templates:/var/kinoulink/templates:ro
+#    - /kinoulink/api-infra/docker/control/config:/var/kinoulink/config:ro
+#  net: "host"
 
 consul:
   command: -server -bootstrap -ui-dir /ui
