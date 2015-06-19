@@ -1,0 +1,25 @@
+---
+- hosts: consul
+  sudo: true
+  vars:
+    timezone: Europe/Paris
+    consul_is_ui: yes
+    consul_is_server: yes
+    consul_enable_nginx_config: yes
+    consul_datacenter: "test"
+    consul_bootstrap: yes
+    consul_node_name: "kinoulink-1"
+    consul_bind_address: "{{ ansible_default_ipv4['address'] }}"
+    nginx_remove_default: yes
+    nginx_sites:
+      - id: consul
+        add_webroot: no
+        name: consul.local
+        rules:
+          - gzip
+          - security
+        auth:
+          name: Consul
+          file: admin
+  roles:
+    - ansible-consul

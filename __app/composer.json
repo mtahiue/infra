@@ -1,0 +1,12 @@
+{
+    "require": {
+        "symfony/console": "3.0.*@dev",
+        "guzzlehttp/guzzle": "5.0.*@dev",
+        "microsoft/windowsazure": "~0.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "kinoulink\\": "src/kinoulink/"
+        }
+    }
+}

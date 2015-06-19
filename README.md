@@ -1,4 +1,4 @@
-# Kinoulink total infrastructure with Vagrant and Docker
+# Kinoulink total infrastructure with Ruby and Docker
 
 ## Tree
 
@@ -26,3 +26,7 @@
 - consul: service discovery, templating
 - registrator: register services into consul
 - control: proxy HTTP:80 to the right web container
+
+### Ansible
+
+```ansible all -m ping -i ./inventory```

@@ -1,0 +1,17 @@
+[consul]
+k-consul.cloudapp.net
+
+[api]
+k-api.cloudapp.net ansible_ssh_user=tom
+
+[mongodb]
+k-mongodb.cloudapp.net
+
+[azure:children]
+consul
+api
+mongodb
+
+[azure:vars]
+ansible_ssh_user=kinoulink
+ansible_ssh_port=666
